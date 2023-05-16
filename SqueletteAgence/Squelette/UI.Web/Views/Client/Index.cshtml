@@ -1,0 +1,60 @@
+﻿@model IEnumerable<ApplicationCore.Domain.Client>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<form asp-action="index">
+    <fieldset>
+        <legend> Rechercher</legend>
+        <input type="text" name="login" />
+        <input type="submit" value="Serach" />
+    </fieldset>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Login)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Password)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Photo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ConseillerFK)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Login)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Password)
+            </td>
+            <td>
+                <img src="~/uploads/@item.Photo" width="50" height="50">
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Conseiller.ConseillerId)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Identifiant">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Identifiant">Conseiller Client</a> |
+                <a asp-action="Delete" asp-route-id="@item.Identifiant">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
